@@ -1,5 +1,5 @@
 const express          = require( 'express'                );
-const apiRouter        = require( './routers/router.js'    );
+const apiRouter        = require( './auth/routers/router.js'    );
 const middlewareConfig = require( './middleware-config.js' );
 //===============================================================>
 // Server Config
