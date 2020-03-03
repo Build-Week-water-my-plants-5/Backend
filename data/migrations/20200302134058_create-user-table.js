@@ -21,10 +21,7 @@ exports.up = function(knex) {
       tbl.increments();
 
       tbl
-        .string('instructions', 255)
-        .notNullable();
-      tbl
-        .string('name', 255)
+        .string('username', 255)
         .notNullable();
       tbl
         .string('phone', 255)

@@ -4,17 +4,17 @@ const db = require( '../db-config' );
 //=====================>
 module.exports = {
   addUser,
-  addContact,
+  addPlant,
   addDetails,
   findBy,
   findByID,
   findDetails,
-  findContacts,
+  findPlants,
   updateUser,
   updateContact,
   updateDetails,
   removeUser,
-  removeContact,
+  removePlant,
   removeDetails,
 };
 //===============================================================>
@@ -24,6 +24,12 @@ async function addUser( user ) {
   const [ id ] = await db( 'users' )
     .insert( user, 'id' );
   return findByID( id );
+}
+//=====================> Add Plant to User
+async function addPlant( plant ) {
+  const [ user_id ] = await db( 'user_plants' )
+    .insert( plant, 'id' );
+  return findPlants( user_id );
 }
 //=====================> Add Contact
 async function addContact( contact ) {
@@ -44,7 +50,7 @@ async function addDetails( details ) {
   return db( 'user_details' )
     .select( 'user_id'
       , 'id as details_id'
-      , 'name as user_name'
+      , 'username as user_name'
       , 'phone as user_phone'
       , 'email as user_email')
     .where( 'id', details_id )
@@ -68,11 +74,21 @@ function findByID( id ) {
 function findDetails( id ) {
   return db( 'user_details as ud' )
     .select( 'ud.user_id as user_id'
-      , 'ud.name as user_name'
+      , 'ud.username as user_name'
       , 'ud.phone as user_phone'
       , 'ud.email as user_email' )
     .where( 'ud.user_id', id )
     .first();
+}
+//=====================> Find Plants
+function findPlants( id ) {
+  return db( 'user_plants as up' )
+    .innerJoin( 'plants as p', 'up.plant_id', 'p.id' )
+    .select( 'up.user_id as user_id'
+      ,'p.id as plant_id'
+      , 'p.name as plant_name'
+      , 'p.frequency as watering_frequency' )
+    .where( 'up.user_id', id )
 }
 //=====================> Find Contacts
 function findContacts( id ){
@@ -117,7 +133,7 @@ function updateDetails( id, changes ) {
       db( 'user_details as ud' )
         .select( 'ud.user_id'
           , 'ud.id as details_id'
-          , 'ud.name as user_name'
+          , 'ud.username as user_name'
           , 'ud.phone as user_phone'
           , 'ud.email as user_email')
         .where( 'ud.user_id', id )
@@ -140,17 +156,17 @@ function removeUser( id ) {
         : null;
     } );
 }
-//=====================> Remove Contact
-function removeContact( id, contact_id ) {
-  return db( 'contacts' )
-    .where( 'id', contact_id )
+//=====================> Remove Plant
+function removePlant( id ) {
+  return db( 'user_plants' )
+    .where( 'id', id )
     .first()
-    .then( contact => {
-      return contact ?
-        db( 'contacts' )
-          .where( 'id', contact_id )
+    .then( plant => {
+      return plant ?
+        db( 'user_plants' )
+          .where( { id } )
           .del()
-          .then( () => contact )
+          .then( () => plant )
         : null;
     } );
 }
