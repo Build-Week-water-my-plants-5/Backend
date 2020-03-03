@@ -7,12 +7,20 @@ const Users      = require( '../../../data/models/user-models' );
 // Register/Login/Logout
 //=====================> Register
 router.post( '/register', ( req, res ) => {
-  const user    = req.body;
+  const user    = { username: req.body.username, password: req.body.password };
   const hash    = bcrypt.hashSync( user.password, 14 );
   user.password = hash;
 
   Users.addUser( user )
-    .then ( saved => { res.status( 201 ).json( saved ); } )
+    .then ( saved => {
+
+      const userDetails = { username: req.body.username, phone: req.body.phone, email: req.body.email, user_id: saved.id };
+      Users.addDetails( userDetails )
+        .then( details => {
+          res.status( 201 ).json( details ); 
+        } )
+        .catch( error => { res.status( 500 ).json( error ); console.log(error); } );
+    } )
     .catch( error => { res.status( 500 ).json( error ); } );
 } );
 //=====================> Login
