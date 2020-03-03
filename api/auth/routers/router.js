@@ -1,7 +1,5 @@
 const router     = require( 'express' ).Router();
-const authRouter  = require( './auth-router' );
-const userRouter  = require( './user-router' );
-const authMiddleWare = require( '../auth-middleware' );
+const authRouter = require( './auth-router' );
 //===============================================================>
 // Use
 //=====================>
