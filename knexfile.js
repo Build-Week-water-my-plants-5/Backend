@@ -45,11 +45,15 @@ module.exports = {
   // Production
   //=====================>
   production: {
-    client: 'pg',
-    connection: process.env.DATABASE_URL,
+    client: 'sqlite3',
+    useNullAsDefault: true,
+    connection: {
+      filename: './data/bw-wmp-5-testing.db3'
+    },
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: ( conn, done ) => {
+        conn.run( 'PRAGMA foreign_keys = ON', done );
+      }
     },
     migrations: {
       directory: './data/migrations'

@@ -13,7 +13,6 @@ router.post( '/register', ( req, res ) => {
 
   Users.addUser( user )
     .then ( saved => {
-
       const userDetails = { username: req.body.username, phone: req.body.phone, email: req.body.email, user_id: saved.id };
       Users.addDetails( userDetails )
         .then( details => {
