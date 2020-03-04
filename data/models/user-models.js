@@ -11,7 +11,6 @@ module.exports = {
   findDetails,
   findPlants,
   updateUser,
-  updateContact,
   updateDetails,
   removeUser,
   removePlant,
@@ -26,22 +25,10 @@ async function addUser( user ) {
   return findByID( id );
 }
 //=====================> Add Plant to User
-async function addPlant( plant ) {
+async function addPlant( id, plant ) {
   const [ user_id ] = await db( 'user_plants' )
     .insert( plant, 'id' );
-  return findPlants( user_id );
-}
-//=====================> Add Contact
-async function addContact( contact ) {
-  const [ contact_id ] = await db( 'contacts' )
-    .insert( contact, 'id' );
-  return db( 'contacts' )
-    .select( 'user_id'
-      , 'id as contact_id'
-      , 'name as contact_name'
-      , 'phone as contact_phone')
-    .where( 'id', contact_id )
-    .first();
+  return findPlants( id );
 }
 //=====================> Add Details
 async function addDetails( details ) {
@@ -90,15 +77,6 @@ function findPlants( id ) {
       , 'p.frequency as watering_frequency' )
     .where( 'up.user_id', id )
 }
-//=====================> Find Contacts
-function findContacts( id ){
-  return db( 'contacts as c' )
-    .select( 'c.user_id as user_id'
-      , 'c.id as contact_id'
-      , 'c.name as contact_name'
-      , 'c.phone as contact_phone' )
-    .where( 'c.user_id', id );
-}
 //===============================================================>
 // Updates
 //=====================> Update User
@@ -107,22 +85,6 @@ function updateUser( id, changes ) {
     .where ( { id }  )
     .update( changes )
     .then( () => findByID( id ) );
-}
-//=====================> Update Contact
-function updateContact( id, changes, contact_id ) {
-  return db( 'contacts' )
-    .join  ( 'users'    )
-    .where ( { id: contact_id, user_id: id } )
-    .update( changes )
-    .then( () => 
-      db( 'contacts' )
-        .select( 'user_id'
-          , 'id as contact_id'
-          , 'name as contact_name'
-          , 'phone as contact_phone')
-        .where( 'id', contact_id )
-        .first()
-    );
 }
 //=====================> Update Details
 function updateDetails( id, changes ) {
