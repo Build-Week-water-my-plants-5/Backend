@@ -1,7 +1,7 @@
 const router     = require( 'express' ).Router();
-const bcrypt     = require( 'bcryptjs'          );
+const bcrypt     = require( 'bcryptjs'           );
 const restricted = require( '../auth-middleware' );
-const jwt        = require( 'jsonwebtoken'      );
+const jwt        = require( 'jsonwebtoken'       );
 const Users      = require( '../../../data/models/user-models' );
 //===============================================================>
 // Register/Login/Logout
