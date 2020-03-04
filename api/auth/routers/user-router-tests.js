@@ -6,7 +6,7 @@ const server  = require( '../server'            );
 //=====================>
 module.exports = userTests = () => {
   describe( 'users-router.js', () => {
-    const user = { username: 'test-user', password: 'pass' };
+    const user = { username: 'test-user', password: 'pass', phone: '1234567890', email: 'no@mail.com' };
     let token  = null;
     //=====================>
     // Setup
@@ -67,7 +67,7 @@ module.exports = userTests = () => {
 
 
       //=====================> delete the user
-      describe( 'DELETE /user', () => {
+      /* describe( 'DELETE /user', () => {
         it( 'should return a JSON object and status 200', async() => {
           await request( server )
             .delete( '/api/user'    )
@@ -77,7 +77,7 @@ module.exports = userTests = () => {
               expect( res.status ).toBe   ( 200     );
             } );
         } );
-      } );
+      } ); */
     } );
   } );
 };

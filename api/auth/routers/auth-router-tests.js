@@ -22,18 +22,18 @@ module.exports = authRouterTests = () => {
     describe( 'POST /register', () => {
       //=====================> status code 201
       it( 'should return a status 201 created', async() => {
-        await request( server )
+        await request( server         )
           .post( '/api/auth/register' )
-          .send( { username: 'test2', password: 'pass' } )
+          .send( { username: 'test2', password: 'pass', phone: '1234567890', email: 'no@mail.com' } )
           .then( res => {
             expect( res.status ).toBe( 201 );
           } );
       } );
       //=====================> json object
       it( 'should return a JSON object', async() => {
-        await request( server )
+        await request( server         )
           .post( '/api/auth/register' )
-          .send( { username: 'test3', password: 'pass' } )
+          .send( { username: 'test3', password: 'pass', phone: '1234567890', email: 'no@mail.com' } )
           .then( res => {
             expect( res.type ).toMatch( /json/i );
           } );
@@ -45,7 +45,7 @@ module.exports = authRouterTests = () => {
     describe( 'POST /login', () => {
       //=====================> status code 200
       it( 'should return a status 200 OK', async() => {
-        await request( server )
+        await request( server      )
           .post( '/api/auth/login' )
           .send( { username: 'test3', password: 'pass' } )
           .then( res => {
@@ -55,7 +55,7 @@ module.exports = authRouterTests = () => {
       } );
       //=====================> json object
       it( 'should return a JSON object', async() => {
-        await request( server )
+        await request( server      )
           .post( '/api/auth/login' )
           .send( { username: 'test3', password: 'pass' } )
           .then( res => {
@@ -69,18 +69,18 @@ module.exports = authRouterTests = () => {
     describe( 'GET /logout', () => {
       //=====================> status code 200
       it( 'should return a status 200 OK', async() => {
-        await request( server )
-          .get( '/api/auth/logout' )
-          .set( 'token', token )
+        await request( server       )
+          .get ( '/api/auth/logout' )
+          .set ( 'token', token     )
           .then( res => {
             expect( res.status ).toBe( 200 );
           } );
       } );
       //=====================> json object
       it( 'should return a JSON object', async() => {
-        await request( server )
-          .get( '/api/auth/logout' )
-          .set( 'token', token )
+        await request( server       )
+          .get ( '/api/auth/logout' )
+          .set ( 'token', token     )
           .then( res => {
             expect( res.type ).toMatch( /json/i );
           } );
