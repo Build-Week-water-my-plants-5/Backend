@@ -11,8 +11,10 @@ router.get( '/test', ( req, res ) =>  {
 
 //=====================> Retrieving a user with ID req.params.id
 
-router.get( '/:id', ( req, res ) =>  {
-  Users.findDetails(req.params.id) 
+router.get( '/', ( req, res ) =>  {
+  const { id } = req.token;
+
+  Users.findDetails(id) 
     .then( users => {
       res.status( 200 ).json( users );
     })
@@ -21,8 +23,10 @@ router.get( '/:id', ( req, res ) =>  {
 
 //=====================> Retrieving a user's plants with ID req.params.id
 
-router.get( '/:id/plants', ( req, res ) =>  {
-  Users.findPlants(req.params.id) 
+router.get( '/plants', ( req, res ) =>  {
+  const { id } = req.token;
+
+  Users.findPlants(id) 
     .then( plants => {
       res.status( 200 ).json( plants );
     })
@@ -33,10 +37,11 @@ router.get( '/:id/plants', ( req, res ) =>  {
 // POST requests
 //=====================> Posting a plant to a user
 
-router.post( '/:id', ( req, res ) => {
-  const plant = { user_id: req.params.id, plant_id: req.body.plant_id }
+router.post( '/', ( req, res ) => {
+  const { id } = req.token;
+  const plant = { user_id: id, plant_id: req.body.plant_id }
 
-  Users.addPlant(plant)
+  Users.addPlant(id, plant)
     .then( plants => {
       res.status( 201 ).json( plants );
     })
@@ -47,8 +52,10 @@ router.post( '/:id', ( req, res ) => {
 // PUT requests
 //=====================> Update User Details
 
-router.put( '/:id', ( req, res ) => {
-  Users.updateDetails(req.params.id, req.body)
+router.put( '/', ( req, res ) => {
+  const { id } = req.token;
+
+  Users.updateDetails(id, req.body)
     .then( details => {
       res.status( 201 ).json( details );
     })
@@ -59,8 +66,8 @@ router.put( '/:id', ( req, res ) => {
 // DELETE requests
 //=====================>
 
-router.delete( '/:id/plants/:plant_id', (req, res) => {
-  Users.removePlant( req.params.plant_id )
+router.delete( '/plants/:id', (req, res) => {
+  Users.removePlant( req.params.id )
     .then( plant => {
       res.status( 200 ).json( plant );
     } )

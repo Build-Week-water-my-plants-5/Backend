@@ -25,10 +25,10 @@ async function addUser( user ) {
   return findByID( id );
 }
 //=====================> Add Plant to User
-async function addPlant( plant ) {
+async function addPlant( id, plant ) {
   const [ user_id ] = await db( 'user_plants' )
     .insert( plant, 'id' );
-  return findPlants( user_id );
+  return findPlants( id );
 }
 //=====================> Add Details
 async function addDetails( details ) {
