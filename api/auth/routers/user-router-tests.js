@@ -50,6 +50,19 @@ module.exports = userTests = () => {
         it( 'should return a JSON object and status 200', async() => {
           await request( server )
             .put ( '/api/users'               )
+            .send( { password: 'newpass' } )
+            .set ( 'token', token             )
+            .then( res => {
+              expect( res.type   ).toMatch( /json/i );
+              expect( res.status ).toBe   ( 201     );
+            } );
+        } );
+      } );
+      //=====================> update the user's details
+      describe( 'PUT /users/details', () => {
+        it( 'should return a JSON object and status 200', async() => {
+          await request( server )
+            .put ( '/api/users/details'       )
             .send( { email: 'some@mail.com' } )
             .set ( 'token', token             )
             .then( res => {
@@ -67,17 +80,17 @@ module.exports = userTests = () => {
 
 
       //=====================> delete the user
-      /* describe( 'DELETE /user', () => {
+      describe( 'DELETE /users', () => {
         it( 'should return a JSON object and status 200', async() => {
           await request( server )
-            .delete( '/api/user'    )
+            .delete( '/api/users'    )
             .set   ( 'token', token )
             .then  ( res => {
               expect( res.type   ).toMatch( /json/i );
               expect( res.status ).toBe   ( 200     );
             } );
         } );
-      } ); */
+      } );
     } );
   } );
 };
