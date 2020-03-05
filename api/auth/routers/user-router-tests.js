@@ -1,6 +1,6 @@
-const request = require( 'supertest'            );
-const db      = require( '../../data/db-config' );
-const server  = require( '../server'            );
+const request = require( 'supertest'               );
+const db      = require( '../../../data/db-config' );
+const server  = require( '../../server'            );
 //===============================================================>
 // Tests
 //=====================>
@@ -34,10 +34,10 @@ module.exports = userTests = () => {
     //=====================>
     describe( 'user functionality', () => {
       //=====================> get the user
-      describe( 'GET /user', () => {
+      describe( 'GET /users', () => {
         it( 'should return a JSON object and status 200', async() => {
           await request( server )
-            .get ( '/api/user'    )
+            .get ( '/api/users'   )
             .set ( 'token', token )
             .then( res => {
               expect( res.type   ).toMatch( /json/i );
@@ -46,15 +46,15 @@ module.exports = userTests = () => {
         } );
       } );
       //=====================> update the user
-      describe( 'PUT /user', () => {
+      describe( 'PUT /users', () => {
         it( 'should return a JSON object and status 200', async() => {
           await request( server )
-            .put ( '/api/user'              )
-            .send( { password: 'testpass' } )
-            .set ( 'token', token           )
+            .put ( '/api/users'               )
+            .send( { email: 'some@mail.com' } )
+            .set ( 'token', token             )
             .then( res => {
               expect( res.type   ).toMatch( /json/i );
-              expect( res.status ).toBe   ( 200     );
+              expect( res.status ).toBe   ( 201     );
             } );
         } );
       } );

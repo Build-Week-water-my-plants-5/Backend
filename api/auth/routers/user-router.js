@@ -54,7 +54,7 @@ router.post( '/', ( req, res ) => {
 
 router.put( '/', ( req, res ) => {
   const { id } = req.token;
-
+  console.log( req.body );
   Users.updateDetails(id, req.body)
     .then( details => {
       res.status( 201 ).json( details );

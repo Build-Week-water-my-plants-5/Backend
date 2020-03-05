@@ -7,8 +7,9 @@ const db              = require( './data/db-config'                      );
 //=====================>
 describe( 'clear test DB then run all tests', () => {
   beforeAll( async() => {
-    await db( 'users'  ).truncate();
-    await db( 'plants' ).truncate();
+    await db( 'users'        ).truncate();
+    await db( 'user_details' ).truncate();
+    await db( 'plants'       ).truncate();
   } );
 
   describe( 'api-test',   apiRouterTest   );
