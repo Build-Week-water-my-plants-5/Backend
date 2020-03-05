@@ -1,18 +1,62 @@
 # Backend
 _________________________________________________________
-GET REQUESTS
 
-| /api/users/:id | Returns a user object with details from the database |
-| /api/users/:id/plants | Returns a specified user's plants |
+## Introduction
+Documentation for Water My Plants 5 Backend
 
-POST REQUESTS
+On successful login, a token is sent back that will be required in the header for all endpoints beyond registration/login.
 
-| /api/auth/register | Registers a new user. Requires a username, password, email, and phone number. | Returns an object with those details. |
-| /api/auth/login | Logins a user in | Returns a token and a message |
-| /api/users/:id | Post a plant to a specific user here. Takes a plant ID from the database. | Returns an array of all plants this user has. |
+## Endpoints
+---
+### Auth
+#### Register
+**_POST_**
 
-PUT REQUESTS
+Registers a new user. Requires a username, password, email, and phone number
+###### Example
+```
+.post( `https://wmpbackend.herokuapp.com/api/auth/register`, { username: 'user', password: 'pass', email: 'some@email.com', phone: '1234567890' } )
+```
+Returns a JSON object of the user, sans password.
 
-| api/users/:id | Edits a user's email or phone number. Does not need a full user object, only the field you are currently editing. |
-| api/users/:id/plants/:user_plant_id | Deletes a specific plant from a specific user's list of plants. Takes a user_plant_id |
-_________________________________________________________
+---
+
+#### Login
+**_POST_**
+
+Logs a user into the backend DB
+###### Example
+```
+.post( `https://wmpbackend.herokuapp.com/api/auth/login`, { username: 'user', password: 'pass' } )
+```
+Returns a JSON object containing the authorization token, and welcome message
+
+---
+### Users
+
+#### Get user details
+**_GET_**
+###### Example
+```
+.get( `https://wmpbackend.herokuapp.com/api/users` )
+```
+Returns a JSON object containing the current user's details
+
+---
+
+#### Update the username or password
+**_PUT_**
+###### Example
+```
+.put( `https://wmpbackend.herokuapp.com/api/users`, { password: 'newpass' } )
+```
+Returns a JSON object of the base user (no details, username/password (hashed))
+
+---
+#### Delete a user
+**_DELETE_**
+###### Example
+```
+.delete( `` )
+```
+Returns a JSON object of the deleted user
