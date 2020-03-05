@@ -39,6 +39,7 @@ router.get( '/plants', ( req, res ) =>  {
 
 router.post( '/plants', ( req, res ) => {
   const { id } = req.token;
+  console.log( req.body );
   const plant = { user_id: id, plant_id: req.body.plant_id }
 
   Users.addPlant( id, plant )
