@@ -59,6 +59,14 @@ exports.up = function(knex) {
       tbl.increments();
 
       tbl
+        .string('nickname', 255)
+        .notNullable()
+        .defaultTo('');
+      tbl
+        .string('notes', 510)
+        .notNullable()
+        .defaultTo('');
+      tbl
         .integer('user_id')
         .unsigned()
         .notNullable()

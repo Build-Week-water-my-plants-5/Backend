@@ -72,8 +72,10 @@ function findPlants( id ) {
   return db( 'user_plants as up' )
     .innerJoin( 'plants as p', 'up.plant_id', 'p.id' )
     .select( 'up.user_id as user_id'
-      ,'p.id as plant_id'
+      , 'p.id as plant_id'
       , 'p.name as plant_name'
+      , 'up.nickname'
+      , 'up.notes'
       , 'p.frequency as watering_frequency' )
     .where( 'up.user_id', id )
 }
