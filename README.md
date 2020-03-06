@@ -55,7 +55,7 @@ type: **_POST_**
 Requires a JSON object in body containing the name and frequency.
 ###### Example:
 ```
-.get( `https://wmpbackend.herokuapp.com/api/plants`, { name: 'plant name', frequency: 'weekly' } )
+.post( `https://wmpbackend.herokuapp.com/api/plants`, { name: 'plant name', frequency: 'weekly' } )
 ```
 Returns a JSON object containing the added plant's details
 
@@ -66,7 +66,7 @@ type: **_PUT_**
 Requires a JSON object in body containing the changes
 ###### Example:
 ```
-.get( `https://wmpbackend.herokuapp.com/api/plants`, { frequency: 'daily' } )
+.put( `https://wmpbackend.herokuapp.com/api/plants`, { frequency: 'daily' } )
 ```
 Returns a JSON object containing the edited plant's details
 
