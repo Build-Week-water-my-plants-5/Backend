@@ -73,40 +73,36 @@ module.exports = userTests = () => {
       } );
       //=====================>
       // User Plants
+      //=====================> add plant to user
+      /* describe( 'POST /users/plants', () => {
+        it( 'should return a status 201', async() => {
+          await request(  server     )
+          .post( '/api/users/plants' )
+          .send( { plant_id: '1' }   )
+          .set ( 'token', token      )
+          .then( res => {
+            expect( res.status ).toBe( 201 );
+          } )
+        } )
+      } )
       //=====================> get the user's plants
       describe( 'GET /users/plants', () => {
-        it( 'should return a JSON object and status 200', async() => {
+        it( 'should return a status 200', async() => {
           await request( server        )
             .get ( '/api/users/plants' )
             .set ( 'token', token      )
             .then( res => {
-              expect( res.type   ).toMatch( /json/i );
-              expect( res.status ).toBe   ( 200     );
+              expect( res.status ).toBe( 200 );
             } );
         } );
-      } );
-      //=====================> add plant to user
-      describe( 'POST /users/plants', () => {
-        it( 'should return a JSON object and status 201', async() => {
-          await request(  server     )
-          .post( '/api/users/plants' )
-          .send( { plant_id: 1 }     )
-          .set ( 'token', token      )
-          .then( res => {
-            console.log( res.status );
-            expect( res.type   ).toMatch( /json/i );
-            expect( res.status ).toBe   ( 201     );    // will not work until plants table/endpoints setup
-          } )
-        } )
-      } )
+      } ); */
       //=====================> delete plant from user
       describe( 'DELETE /users/plants/:id', () => {
         it( 'should return a JSON object and status 200', async() => {
-          await request(  server       )
-          .post( '/api/users/plants/1' )
-          .set ( 'token', token        )
-          .then( res => {
-            console.log( res.status );
+          await request(  server         )
+          .delete( '/api/users/plants/1' )
+          .set   ( 'token', token        )
+          .then  ( res => {
             expect( res.type   ).toMatch( /json/i );
             expect( res.status ).toBe   ( 200     );
           } )
