@@ -1,31 +1,27 @@
 # Backend
-_________________________________________________________
-
 ## Introduction
 Documentation for Water My Plants 5 Backend
 
 On successful login, a token is sent back that will be required in the header for all endpoints beyond registration/login.
-
 ## Endpoints
 ---
 ### Auth
 #### Register
-**_POST_**
+type:  **_POST_**
 
 Registers a new user. Requires a username, password, email, and phone number
-###### Example
+###### Example:
 ```
 .post( `https://wmpbackend.herokuapp.com/api/auth/register`, { username: 'user', password: 'pass', email: 'some@email.com', phone: '1234567890' } )
 ```
 Returns a JSON object of the user, sans password.
 
 ---
-
 #### Login
-**_POST_**
+type:  **_POST_**
 
 Logs a user into the backend DB
-###### Example
+###### Example:
 ```
 .post( `https://wmpbackend.herokuapp.com/api/auth/login`, { username: 'user', password: 'pass' } )
 ```
@@ -33,30 +29,69 @@ Returns a JSON object containing the authorization token, and welcome message
 
 ---
 ### Users
-
 #### Get user details
-**_GET_**
-###### Example
+type:  **_GET_**
+
+###### Example:
 ```
 .get( `https://wmpbackend.herokuapp.com/api/users` )
 ```
 Returns a JSON object containing the current user's details
 
 ---
-
 #### Update the username or password
-**_PUT_**
-###### Example
+type:  **_PUT_**
+
+###### Example:
 ```
 .put( `https://wmpbackend.herokuapp.com/api/users`, { password: 'newpass' } )
 ```
-Returns a JSON object of the base user (no details, username/password (hashed))
+Returns a JSON object of the base user (no details, just username/password ( hashed ) )
 
 ---
 #### Delete a user
-**_DELETE_**
-###### Example
+type:  **_DELETE_**
+
+###### Example:
 ```
-.delete( `` )
+.delete( `https://wmpbackend.herokuapp.com/api/users` )
 ```
 Returns a JSON object of the deleted user
+
+---
+### User details
+#### update user details (not username/password)
+type:  **_PUT_**
+
+###### Example:
+```
+.put( `https://wmpbackend.herokuapp.com/api/users/details`, {	"email": new@mail.com" } )
+```
+---
+### User plants
+#### get list of user's plants
+type: **_GET_**
+
+###### Example:
+```
+.get( `https://wmpbackend.herokuapp.com/api/users/plants` )
+```
+---
+#### add a plant to a user
+type: **_POST_**
+
+###### Example:
+```
+.post( `https://wmpbackend.herokuapp.com/api/users/plants`, { plant_id: 1 } )
+```
+---
+#### delete a plant from a user based on plant id
+type: **_DELETE_**
+
+###### Example:
+```
+.delete( `https://wmpbackend.herokuapp.com/api/users/plants/1` )
+```
+Returns the deleted plant object in JSON object notation
+
+---
