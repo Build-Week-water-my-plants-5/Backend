@@ -123,7 +123,7 @@ function removeUser( id ) {
 //=====================> Remove Plant
 function removePlant( id ) {
   return db( 'user_plants' )
-    .where( 'id', id )
+    .where( 'plant_id', id )
     .first()
     .then( plant => {
       return plant ?
