@@ -11,7 +11,7 @@ type:  **_POST_**
 
 Registers a new user. Requires a JSON object in the body containing username, password, email, and phone number
 ###### Example:
-```
+```js
 .post( `https://wmpbackend.herokuapp.com/api/auth/register`, { username: 'user', password: 'pass', email: 'some@email.com', phone: '1234567890' } )
 ```
 Returns a JSON object of the user, sans password.
@@ -22,7 +22,7 @@ type:  **_POST_**
 
 Logs a user into the backend DB. Requires a JSON object in body containing the username and password.
 ###### Example:
-```
+```js
 .post( `https://wmpbackend.herokuapp.com/api/auth/login`, { username: 'user', password: 'pass' } )
 ```
 Returns a JSON object containing the authorization token, and welcome message
@@ -33,7 +33,7 @@ Returns a JSON object containing the authorization token, and welcome message
 type: **_GET_**
 
 ###### Example:
-```
+```js
 .get( `https://wmpbackend.herokuapp.com/api/plants` )
 ```
 Returns an array of JSON objects of all the plants
@@ -43,7 +43,7 @@ Returns an array of JSON objects of all the plants
 type: **_GET_**
 
 ###### Example:
-```
+```js
 .get( `https://wmpbackend.herokuapp.com/api/plants/1` )
 ```
 Returns a JSON object containing the plant details
@@ -54,7 +54,7 @@ type: **_POST_**
 
 Requires a JSON object in body containing the name and frequency.
 ###### Example:
-```
+```js
 .post( `https://wmpbackend.herokuapp.com/api/plants`, { name: 'plant name', frequency: 'weekly' } )
 ```
 Returns a JSON object containing the added plant's details
@@ -65,7 +65,7 @@ type: **_PUT_**
 
 Requires a JSON object in body containing the changes
 ###### Example:
-```
+```js
 .put( `https://wmpbackend.herokuapp.com/api/plants`, { frequency: 'daily' } )
 ```
 Returns a JSON object containing the edited plant's details
@@ -76,7 +76,7 @@ Returns a JSON object containing the edited plant's details
 type:  **_GET_**
 
 ###### Example:
-```
+```js
 .get( `https://wmpbackend.herokuapp.com/api/users` )
 ```
 Returns a JSON object containing the current user's details
@@ -87,7 +87,7 @@ type:  **_PUT_**
 
 Requires a JSON object in body containing the changes
 ###### Example:
-```
+```js
 .put( `https://wmpbackend.herokuapp.com/api/users`, { password: 'newpass' } )
 ```
 Returns a JSON object of the base user (no details, just username/password ( hashed ) )
@@ -97,7 +97,7 @@ Returns a JSON object of the base user (no details, just username/password ( has
 type:  **_DELETE_**
 
 ###### Example:
-```
+```js
 .delete( `https://wmpbackend.herokuapp.com/api/users` )
 ```
 Returns a JSON object of the deleted user
@@ -110,7 +110,7 @@ type:  **_PUT_**
 
 Requires a JSON object in body containing the changes
 ###### Example:
-```
+```js
 .put( `https://wmpbackend.herokuapp.com/api/users/details`, {	"email": new@mail.com" } )
 ```
 ---
@@ -119,7 +119,7 @@ Requires a JSON object in body containing the changes
 type: **_GET_**
 
 ###### Example:
-```
+```js
 .get( `https://wmpbackend.herokuapp.com/api/users/plants` )
 ```
 ---
@@ -129,7 +129,7 @@ type: **_POST_**
 
 Requires a JSON object in body containing the plant_id
 ###### Example:
-```
+```js
 .post( `https://wmpbackend.herokuapp.com/api/users/plants`, { plant_id: 1 } )
 ```
 ---
@@ -137,7 +137,7 @@ Requires a JSON object in body containing the plant_id
 type: **_DELETE_**
 
 ###### Example:
-```
+```js
 .delete( `https://wmpbackend.herokuapp.com/api/users/plants/1` )
 ```
 Returns the deleted plant object in JSON object notation
