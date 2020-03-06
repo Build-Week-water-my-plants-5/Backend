@@ -6,8 +6,8 @@ const authMiddleWare = require( '../auth-middleware' );
 //===============================================================>
 // Use
 //=====================>
-router.use( '/auth', authRouter  );
-router.use( '/users', authMiddleWare, userRouter );
+router.use( '/auth',   authRouter                   );
+router.use( '/users',  authMiddleWare, userRouter   );
 router.use( '/plants', authMiddleWare, plantsRouter );
 //===============================================================>
 // Router working message
