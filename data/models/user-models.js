@@ -128,7 +128,7 @@ function removePlant( id ) {
     .then( plant => {
       return plant ?
         db( 'user_plants' )
-          .where( { id } )
+          .where( 'plant_id', id )
           .del()
           .then( () => plant )
         : null;
