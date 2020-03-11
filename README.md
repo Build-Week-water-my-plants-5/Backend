@@ -111,8 +111,10 @@ type:  **_PUT_**
 Requires a JSON object in body containing the changes
 ###### Example:
 ```js
-.put( `https://wmpbackend.herokuapp.com/api/users/details`, {	"email": new@mail.com" } )
+.put( `https://wmpbackend.herokuapp.com/api/users/details`, {	"email": "new@mail.com" } )
 ```
+Returns a JSON object of the modified user
+
 ---
 ### User plants
 #### get list of user's plants
@@ -122,6 +124,8 @@ type: **_GET_**
 ```js
 .get( `https://wmpbackend.herokuapp.com/api/users/plants` )
 ```
+Returns an array of JSON plant objects for the current user
+
 ---
 #### add a plant to a user
 type: **_POST_**
@@ -132,6 +136,8 @@ Requires a JSON object in body containing the plant_id
 ```js
 .post( `https://wmpbackend.herokuapp.com/api/users/plants`, { plant_id: 1 } )
 ```
+Returns a JSON object of the new plant
+
 ---
 #### delete a plant from a user based on plant id
 type: **_DELETE_**
